@@ -61,14 +61,11 @@ const EditProduct = (props) => {
                 name="name"
                 defaultValue={product.name}
                
-                ref={register({ required: true, maxLength: 15 })}
+                ref={register({ required: true })}
               />
               
               {errors.username && errors.username.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>
-              )}
-              {errors.username && errors.username.type === "maxLength" && (
-                <span className="alert-danger">Tối đa 15 ký tự</span>
               )}
              
             </div>
