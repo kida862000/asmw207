@@ -39,13 +39,10 @@ const AddProduct = (props) => {
                 className="form-control"
                 id="name"
                 name="name"
-                ref={register({ required: true, maxLength: 15 })}
+                ref={register({ required: true})}
               />
               {errors.name && errors.name.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>
-              )}
-              {errors.name && errors.name.type === "maxLength" && (
-                <span className="alert-danger">Tối đa 15 ký tự</span>
               )}
             </div>
             <div className="form-group">
