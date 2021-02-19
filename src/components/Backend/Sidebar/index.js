@@ -42,6 +42,11 @@ const Sidebar = props => {
                 <span>User</span></Link>
             </li>
             <li className="nav-item">
+            <Link className="nav-link" to="/admin/order">
+                <i className="fas fa-fw fa-table" />
+                <span>Order</span></Link>
+            </li>
+            <li className="nav-item">
             <Link className="nav-link" to={`/`}>
                 <i className="fa fa-address-book" />
                 <span>FrontEnd</span></Link>
