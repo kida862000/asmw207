@@ -59,7 +59,7 @@ const Product = (props) => {
                             </td>
                             <td>${pro.price}</td>
                             <td>{pro.noidung}</td>
-                            <td>pro.cateid</td>
+                            <td>{pro.cateId}</td>
                             <td>
                               <Link to={`/admin/product/edit/${pro.id}`}>
                                 <button className="btn btn-primary btn-sm">
