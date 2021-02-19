@@ -1,79 +1,52 @@
-import React from "react";
-function Dashboard() {
-  return (
-    <div>
-      <div id="page-wrapper">
-        <div className="header">
-          <h1 className="page-header">
-            Dashboard <small>Welcome John Doe</small>
-          </h1>
-        </div>
-        <div id="page-inner">
-          {/* /. ROW  */}
-          <div className="row">
-            <div className="col-md-3 col-sm-12 col-xs-12">
-              <div className="board">
-                <div className="panel panel-primary">
-                  <div className="number">
-                    <h3></h3>
-                    <h3>44,023</h3>
-                    <small>Daily Visits</small>
-                  </div>
-                  <div className="icon">
-                    <i className="fa fa-eye fa-5x red" />
-                  </div>
+import React from 'react'
+import PropTypes from 'prop-types'
+
+const Dashboard = ({category, product}) => {
+    
+    return (
+        <div>
+            <div className="row">
+        {/* Earnings (Monthly) Card Example */}
+        <div className="col-xl-3 col-md-6 mb-4">
+          <div className="card border-left-primary shadow h-100 py-2">
+            <div className="card-body">
+              <div className="row no-gutters align-items-center">
+                <div className="col mr-2">
+                  <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">Tổng số sản phẩm</div>
+                  <div className="h5 mb-0 font-weight-bold text-gray-800">{product.length}</div>
                 </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-12 col-xs-12">
-              <div className="board">
-                <div className="panel panel-primary">
-                  <div className="number">
-                    <h3></h3>
-                    <h3>32,850</h3>
-                    <small>Sales</small>
-                  </div>
-                  <div className="icon">
-                    <i className="fa fa-shopping-cart fa-5x blue" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-12 col-xs-12">
-              <div className="board">
-                <div className="panel panel-primary">
-                  <div className="number">
-                    <h3></h3>
-                    <h3>56,150</h3>
-                    <small>Comments</small>
-                  </div>
-                  <div className="icon">
-                    <i className="fa fa-comments fa-5x green" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 col-sm-12 col-xs-12">
-              <div className="board">
-                <div className="panel panel-primary">
-                  <div className="number">
-                    <h3></h3>
-                    <h3>89,645</h3>
-                    <small>Daily Profits</small>
-                  </div>
-                  <div className="icon">
-                    <i className="fa fa-user fa-5x yellow" />
-                  </div>
+                <div className="col-auto">
+                  <i className="fas fa-calendar fa-2x text-gray-300" />
                 </div>
               </div>
             </div>
           </div>
-          {/*/.row*/}
         </div>
-        {/* /. PAGE INNER  */}
-      </div>
-    </div>
-  );
+        {/* Earnings (Monthly) Card Example */}
+        <div className="col-xl-3 col-md-6 mb-4">
+          <div className="card border-left-success shadow h-100 py-2">
+            <div className="card-body">
+              <div className="row no-gutters align-items-center">
+                <div className="col mr-2">
+                  <div className="text-xs font-weight-bold text-success text-uppercase mb-1">Tổng số danh mục</div>
+                  <div className="h5 mb-0 font-weight-bold text-gray-800">{category.length}</div>
+                </div>
+                <div className="col-auto">
+                  <i className="fas fa-dollar-sign fa-2x text-gray-300" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Earnings (Monthly) Card Example */}
+        
+        </div>
+        </div>
+    )
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+
+}
+
+export default Dashboard
