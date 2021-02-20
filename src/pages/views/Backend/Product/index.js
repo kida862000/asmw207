@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import Axios from "axios";
 const Product = (props) => {
   const { id } = useParams();
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/category?_sort=id&_order=DESC`).then(
+      (res) => {
+        setCategory(res.data);
+      }
+    );
+  }, []);
   const removeProduct = (id) => {
     Axios.delete(`http://localhost:3000/product/${id}`).then((res) => {
       alert("Đã xóa thành công");
