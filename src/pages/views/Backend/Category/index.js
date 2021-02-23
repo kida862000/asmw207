@@ -77,5 +77,8 @@ const Category = (props) => {
     </div>
   );
 };
-
+Category.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+};
 export default Category;

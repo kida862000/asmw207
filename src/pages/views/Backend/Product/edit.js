@@ -35,7 +35,7 @@ const EditProduct = (props) => {
       window.location.reload();
     });
   };
-  
+
   return (
     <div>
       <div id="page-wrapper">
@@ -60,14 +60,12 @@ const EditProduct = (props) => {
                 id="name"
                 name="name"
                 defaultValue={product.name}
-               
                 ref={register({ required: true })}
               />
-              
+
               {errors.username && errors.username.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>
               )}
-             
             </div>
             <div className="form-group">
               <label>Ảnh</label>
@@ -115,7 +113,6 @@ const EditProduct = (props) => {
               <select
                 name="cateId"
                 id="cateId"
-              
                 ref={register({ required: true, maxLength: 15 })}
               >
                 <option value={product.cateId}>{product.cateId}</option>
@@ -140,6 +137,13 @@ const EditProduct = (props) => {
   );
 };
 
-EditProduct.propTypes = {};
+EditProduct.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  images: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  noidung: PropTypes.string.isRequired,
+  cateId: PropTypes.string.isRequired,
+};
 
 export default EditProduct;

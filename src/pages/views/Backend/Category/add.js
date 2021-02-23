@@ -57,6 +57,9 @@ const AddCate = () => {
   );
 };
 
-AddCate.propTypes = {};
+AddCate.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+};
 
 export default AddCate;

@@ -124,6 +124,12 @@ const AddUser = () => {
   );
 };
 
-AddUser.propTypes = {};
+AddUser.propTypes = {
+  id : PropTypes.number.isRequired,
+  Username : PropTypes.string.isRequired,
+  Passwword : PropTypes.string.isRequired,
+  phone : PropTypes.number.isRequired,
+  email : PropTypes.string.isRequired,
+};
 
 export default AddUser;

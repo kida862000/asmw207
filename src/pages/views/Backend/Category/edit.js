@@ -72,6 +72,9 @@ const EditCate = (props) => {
   );
 };
 
-EditCate.propTypes = {};
+EditCate.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+};
 
 export default EditCate;

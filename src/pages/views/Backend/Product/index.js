@@ -4,14 +4,6 @@ import PropTypes from "prop-types";
 import Axios from "axios";
 const Product = (props) => {
   const { id } = useParams();
-  const [category, setCategory] = useState([]);
-  useEffect(() => {
-    Axios.get(`http://localhost:3000/category?_sort=id&_order=DESC`).then(
-      (res) => {
-        setCategory(res.data);
-      }
-    );
-  }, []);
   const removeProduct = (id) => {
     Axios.delete(`http://localhost:3000/product/${id}`).then((res) => {
       alert("Đã xóa thành công");
@@ -68,6 +60,9 @@ const Product = (props) => {
                             <td>${pro.price}</td>
                             <td>{pro.noidung}</td>
                             <td>{pro.cateId}</td>
+                            {/* {props.category.map((cate) => (
+                              <td>{cate.name}</td>
+                            ))} */}
                             <td>
                               <Link to={`/admin/product/edit/${pro.id}`}>
                                 <button className="btn btn-primary btn-sm">
@@ -99,5 +94,12 @@ const Product = (props) => {
     </div>
   );
 };
-
+Product.propTypes = {
+  id : PropTypes.number.isRequired,
+  name : PropTypes.string.isRequired,
+  images : PropTypes.string.isRequired,
+  price : PropTypes.number.isRequired,
+  noidung : PropTypes.string.isRequired,
+  cateId: PropTypes.string.isRequired,
+}
 export default Product;

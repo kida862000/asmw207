@@ -15,7 +15,7 @@ const AddProduct = (props) => {
       window.location.reload();
     });
   };
- 
+
   return (
     <div>
       <div id="page-wrapper">
@@ -39,7 +39,7 @@ const AddProduct = (props) => {
                 className="form-control"
                 id="name"
                 name="name"
-                ref={register({ required: true})}
+                ref={register({ required: true })}
               />
               {errors.name && errors.name.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>
@@ -112,6 +112,13 @@ const AddProduct = (props) => {
   );
 };
 
-AddProduct.propTypes = {};
+AddProduct.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  images: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  noidung: PropTypes.string.isRequired,
+  cateId: PropTypes.string.isRequired,
+};
 
 export default AddProduct;

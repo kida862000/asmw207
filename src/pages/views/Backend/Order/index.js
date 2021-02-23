@@ -2,12 +2,10 @@ import React from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import Axios from "axios";
-const User = (props) => {
+const Order = (props) => {
   const { id } = useParams();
   const remoOrder = (id) => {
-    Axios.delete(
-      `http://localhost:3000/order/${id}`
-    ).then((res) => {
+    Axios.delete(`http://localhost:3000/order/${id}`).then((res) => {
       alert("Đã xóa thành công");
       window.location.reload();
     });
@@ -16,10 +14,10 @@ const User = (props) => {
     <div>
       <div id="page-wrapper">
         <div className="header">
-          <h1 className="page-header">Danh sách User</h1>
+          <h1 className="page-header">Danh sách Order</h1>
           <ol className="breadcrumb">
             <li>
-            <Link to="/admin/user/add">Thêm Mới</Link>
+              <Link to="/admin/user/add">Thêm Mới</Link>
             </li>
           </ol>
         </div>
@@ -71,5 +69,8 @@ const User = (props) => {
     </div>
   );
 };
-
-export default User;
+Order.propTypes = {
+  id: PropTypes.number.isRequired,
+  proId: PropTypes.number.isRequired,
+};
+export default Order;
