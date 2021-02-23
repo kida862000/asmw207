@@ -10,6 +10,7 @@ const Product = (props) => {
       window.location.reload();
     });
   };
+
   return (
     <div>
       <div id="page-wrapper">
@@ -59,10 +60,14 @@ const Product = (props) => {
                             </td>
                             <td>${pro.price}</td>
                             <td>{pro.noidung}</td>
-                            <td>{pro.cateId}</td>
-                            {/* {props.category.map((cate) => (
-                              <td>{cate.name}</td>
-                            ))} */}
+                            <td>
+                              {props.category.map((cate) => (
+                                <p>
+                                  {cate.id == pro.cateId ? cate.name : null}
+                                </p>
+                              ))}
+                            </td>
+
                             <td>
                               <Link to={`/admin/product/edit/${pro.id}`}>
                                 <button className="btn btn-primary btn-sm">
@@ -95,11 +100,11 @@ const Product = (props) => {
   );
 };
 Product.propTypes = {
-  id : PropTypes.number.isRequired,
-  name : PropTypes.string.isRequired,
-  images : PropTypes.string.isRequired,
-  price : PropTypes.number.isRequired,
-  noidung : PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  images: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  noidung: PropTypes.string.isRequired,
   cateId: PropTypes.string.isRequired,
-}
+};
 export default Product;
