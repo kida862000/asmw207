@@ -13,13 +13,13 @@ const EditProduct = (props) => {
   let history = useHistory();
   // hiển thị dữ liệu có id thông qua useEffect
   useEffect(() => {
-    Axios.get(`http://localhost:3000/product/${id}`).then((res) => {
+    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/products/${id}`).then((res) => {
       console.log(res);
       setProduct(res.data);
     });
   }, []);
   useEffect(() => {
-    Axios.get(`http://localhost:3000/category`).then((res) => {
+    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category`).then((res) => {
       console.log(res);
       setCategory(res.data);
     });
@@ -28,7 +28,7 @@ const EditProduct = (props) => {
     const newObj = {
       ...data,
     };
-    Axios.put(`http://localhost:3000/product/${id}`, newObj).then((res) => {
+    Axios.put(`https://5f276252f5d27e001612dfc4.mockapi.io/API/products/${id}`, newObj).then((res) => {
       console.log(res.data);
       history.push("/admin/product");
       alert("Đã sửa thành công");

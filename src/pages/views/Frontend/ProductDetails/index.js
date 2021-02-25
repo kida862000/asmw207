@@ -7,7 +7,7 @@ const ProductDetails = (props) => {
   const [product, setProduct] = useState([]);
   useEffect(() => {
     Axios.get(
-      `http://localhost:3000/product/${id}`
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/products/${id}`
     ).then((res) => {
       console.log(res);
       setProduct(res.data);

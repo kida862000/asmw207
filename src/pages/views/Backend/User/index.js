@@ -5,9 +5,7 @@ import Axios from "axios";
 const User = (props) => {
   const { id } = useParams();
   const removeUser = (id) => {
-    Axios.delete(
-      `http://localhost:3000/user/${id}`
-    ).then((res) => {
+    Axios.delete(`http://localhost:3000/user/${id}`).then((res) => {
       alert("Đã xóa thành công");
       window.location.reload();
     });
@@ -19,7 +17,7 @@ const User = (props) => {
           <h1 className="page-header">Danh sách User</h1>
           <ol className="breadcrumb">
             <li>
-            <Link to="/admin/user/add">Thêm Mới</Link>
+              <Link to="/admin/user/add">Thêm Mới</Link>
             </li>
           </ol>
         </div>
@@ -56,7 +54,7 @@ const User = (props) => {
                             <td>{user.phone}</td>
                             <td>{user.email}</td>
                             <td>
-                              {user.power == 0 ? "Admin" : "Người dùng"}
+                              {user.power == "true" ? "Admin" : "Người dùng"}
                             </td>
                             <td>
                               <Link to={`/admin/user/edit/${user.id}`}>
@@ -90,10 +88,10 @@ const User = (props) => {
   );
 };
 User.propTypes = {
-  id : PropTypes.number.isRequired,
-  Username : PropTypes.string.isRequired,
-  Passwword : PropTypes.string.isRequired,
-  phone : PropTypes.number.isRequired,
-  email : PropTypes.string.isRequired,
-}
+  id: PropTypes.number.isRequired,
+  Username: PropTypes.string.isRequired,
+  Passwword: PropTypes.string.isRequired,
+  phone: PropTypes.number.isRequired,
+  email: PropTypes.string.isRequired,
+};
 export default User;

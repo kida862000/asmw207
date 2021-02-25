@@ -7,7 +7,7 @@ const AddUser = () => {
   const { register, handleSubmit, errors } = useForm();
   let history = useHistory();
   const onSubmit = (data) => {
-    Axios.post("http://localhost:3000/user", data).then((res) => {
+    Axios.post("https://5f276252f5d27e001612dfc4.mockapi.io/API/user", data).then((res) => {
       console.log(res.data);
       history.push("/admin/user");
       alert("Đã thêm danh mục thành công");
@@ -103,8 +103,8 @@ const AddUser = () => {
                 ref={register({ required: true, maxLength: 15 })}
               >
                 <option value="">--Mời bạn chọn quyền hạn--</option>
-                <option value="0">Admin</option>
-                <option value="1">Người dùng</option>
+                <option value="true">Admin</option>
+                <option value="false">Người dùng</option>
               </select>
               {errors.power && errors.power.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>

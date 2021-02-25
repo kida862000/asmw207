@@ -18,7 +18,6 @@ import EditCategory from "./pages/views/Backend/Category/edit";
 import Product from "./pages/views/Backend/Product";
 import AddProduct from "./pages/views/Backend/Product/add";
 import EditProduct from "./pages/views/Backend/Product/edit";
-import Order from "./pages/views/Backend/Order";
 // frontend
 import Home from "./pages/views/Frontend/Home";
 import Products from "./pages/views/Frontend/Product";
@@ -26,32 +25,41 @@ import ProductDetails from "./pages/views/Frontend/ProductDetails";
 function App() {
   const [category, setCategory] = useState([]);
   useEffect(() => {
-    Axios.get(`http://localhost:3000/category?_sort=id&_order=DESC`).then(
+    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category`).then(
       (res) => {
         setCategory(res.data);
       }
     );
   }, []);
+  const [page, setPage] = useState(1);
+  const limit = 10;
   const [product, setProduct] = useState([]);
   useEffect(() => {
-    Axios.get(`http://localhost:3000/product?_sort=id&_order=DESC`).then(
-      (res) => {
-        setProduct(res.data);
-      }
-    );
-  }, []);
+    Axios.get(
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/products` +
+        "?limit=" +
+        limit +
+        "&page=" +
+        page
+    ).then((res) => {
+      setProduct(res.data);
+    });
+  }, [page]);
   const [user, setUser] = useState([]);
   useEffect(() => {
-    Axios.get(`http://localhost:3000/user?_sort=id&_order=DESC`).then((res) => {
+    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/user`).then((res) => {
       setUser(res.data);
     });
   }, []);
-  const [order, setOrder] = useState([]);
-  useEffect(() => {
-    Axios.get(`http://localhost:3000/order?_sort=id&_order=DESC`).then((res) => {
-      setOrder(res.data);
-    });
-  }, []);
+  const trangTruoc = function () {
+    if (page == 1) {
+      return;
+    }
+    setPage(page - 1);
+  };
+  const trangSau = function () {
+    setPage(page + 1);
+  };
   return (
     <div>
       <Router>
@@ -64,7 +72,7 @@ function App() {
                     user={user}
                     category={category}
                     product={product}
-                    order={order}
+                   
                   />
                 </Route>
                 {/* User*/}
@@ -90,16 +98,23 @@ function App() {
                 {/* Product*/}
                 <Route exact path="/admin/product">
                   <Product product={product} category={category} />
+                  <ul className="pagination">
+                    <li className="page-item" onClick={trangTruoc}>
+                      <a className="page-link">Trang trước</a>
+                    </li>
+                    <li className="page-item">
+                      <a className="page-link">{page}</a>
+                    </li>
+                    <li className="page-item" onClick={trangSau}>
+                      <a className="page-link">Trang sau</a>
+                    </li>
+                  </ul>
                 </Route>
                 <Route exact path="/admin/product/add">
                   <AddProduct category={category} />
                 </Route>
                 <Route exact path="/admin/product/edit/:id">
                   <EditProduct category={category} product={product} />
-                </Route>
-                  {/* order*/}
-                  <Route exact path="/admin/order">
-                  <Order order={order} />
                 </Route>
               </Switch>
             </LayoutAdmin>

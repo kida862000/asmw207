@@ -12,7 +12,7 @@ const EditCate = (props) => {
   let history = useHistory();
   // hiển thị dữ liệu có id thông qua useEffect
   useEffect(() => {
-    Axios.get(`http://localhost:3000/category/${id}`).then((res) => {
+    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`).then((res) => {
       console.log(res);
       setCategory(res.data);
     });
@@ -21,7 +21,7 @@ const EditCate = (props) => {
     const newObj = {
       ...data,
     };
-    Axios.put(`http://localhost:3000/category/${id}`, newObj).then((res) => {
+    Axios.put(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`, newObj).then((res) => {
       console.log(res.data);
       history.push("/admin/category");
       alert("Đã sửa thành công");

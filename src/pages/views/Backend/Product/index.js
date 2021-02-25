@@ -5,7 +5,7 @@ import Axios from "axios";
 const Product = (props) => {
   const { id } = useParams();
   const removeProduct = (id) => {
-    Axios.delete(`http://localhost:3000/product/${id}`).then((res) => {
+    Axios.delete(`https://5f276252f5d27e001612dfc4.mockapi.io/API/products/${id}`).then((res) => {
       alert("Đã xóa thành công");
       window.location.reload();
     });

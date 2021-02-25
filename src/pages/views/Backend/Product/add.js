@@ -8,7 +8,7 @@ const AddProduct = (props) => {
   const { register, handleSubmit, errors } = useForm();
   let history = useHistory();
   const onSubmit = (data) => {
-    Axios.post("http://localhost:3000/product", data).then((res) => {
+    Axios.post("https://5f276252f5d27e001612dfc4.mockapi.io/API/products", data).then((res) => {
       console.log(res.data);
       history.push("/admin/product");
       alert("Đã thêm danh mục thành công");

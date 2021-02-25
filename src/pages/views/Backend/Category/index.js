@@ -5,7 +5,7 @@ import Axios from "axios";
 const Category = (props) => {
   const { id } = useParams();
   const removeCategory = (id) => {
-    Axios.delete(`http://localhost:3000/category/${id}`).then((res) => {
+    Axios.delete(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`).then((res) => {
       alert("Đã xóa thành công");
       window.location.reload();
     });

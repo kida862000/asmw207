@@ -7,7 +7,7 @@ const AddCate = () => {
   const { register, handleSubmit, errors } = useForm();
   let history = useHistory();
   const onSubmit = (data) => {
-    Axios.post("http://localhost:3000/category", data).then((res) => {
+    Axios.post("https://5f276252f5d27e001612dfc4.mockapi.io/API/category", data).then((res) => {
       console.log(res.data);
       history.push("/admin/category");
       alert("Đã thêm danh mục thành công");

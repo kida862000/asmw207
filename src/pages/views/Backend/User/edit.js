@@ -13,23 +13,23 @@ const EditUser = (props) => {
   // hiển thị dữ liệu có id thông qua useEffect
   useEffect(() => {
     Axios.get(
-      `http://localhost:3000/user/${id}`
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/user/${id}`
     ).then((res) => {
       console.log(res);
       setUser(res.data);
     });
   }, []);
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const newObj = {
       ...data,
-    
     };
     Axios.put(
-      `http://localhost:3000/user/${id}`, newObj
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/user/${id}`,
+      newObj
     ).then((res) => {
       console.log(res.data);
       history.push("/admin/user");
-      alert("Đã sửa thành công"); 
+      alert("Đã sửa thành công");
       window.location.reload();
     });
   };
@@ -125,9 +125,11 @@ const EditUser = (props) => {
                 name="power"
                 ref={register({ required: true, maxLength: 15 })}
               >
-                <option defaultValue={user.power}>{user.power == 0 ? "Admin" : "Người dùng"}</option>
-                <option value="0">Admin</option>
-                <option value="1">Người dùng</option>
+                <option defaultValue={user.power}>
+                  {user.power == "true" ? "Admin" : "Người dùng"}
+                </option>
+                <option value="true">Admin</option>
+                <option value="false">Người dùng</option>
               </select>
               {errors.power && errors.power.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>
@@ -148,11 +150,11 @@ const EditUser = (props) => {
 };
 
 EditUser.propTypes = {
-  id : PropTypes.number.isRequired,
-  Username : PropTypes.string.isRequired,
-  Passwword : PropTypes.string.isRequired,
-  phone : PropTypes.number.isRequired,
-  email : PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  Username: PropTypes.string.isRequired,
+  Passwword: PropTypes.string.isRequired,
+  phone: PropTypes.number.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default EditUser;
