@@ -48,12 +48,6 @@ const Sidebar = (props) => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/admin/user">
-            <i className="fas fa-fw fa-table" />
-            <span>User</span>
-          </Link>
-        </li>
-        <li className="nav-item">
           <Link className="nav-link" to={`/`}>
             <i className="fa fa-address-book" />
             <span>FrontEnd</span>

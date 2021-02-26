@@ -51,35 +51,7 @@ const Product = () => {
               <div className="row">
                 <div className="col-md-12 mb-5">
                   <div className="float-md-left mb-4">
-                    <h2 className="text-black h5">Shop All</h2>
-                  </div>
-                  <div className="d-flex">
-                    <div className="dropdown mr-1 ml-md-auto">
-                      <button
-                        type="button"
-                        className="btn btn-secondary btn-sm dropdown-toggle"
-                        id="dropdownMenuOffset"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        Latest
-                      </button>
-                      <div
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuOffset"
-                      >
-                        <a className="dropdown-item" href="#">
-                          Men
-                        </a>
-                        <a className="dropdown-item" href="#">
-                          Women
-                        </a>
-                        <a className="dropdown-item" href="#">
-                          Children
-                        </a>
-                      </div>
-                    </div>
+                    <h2 className="text-black h5">Tất cả sản phẩm</h2>
                   </div>
                 </div>
               </div>
@@ -140,7 +112,7 @@ const Product = () => {
                   {category.map((cate, index) => (
                     <li className="mb-1">
                       <a href="#" className="d-flex">
-                        <span>{cate.name}</span>
+                        <span> <Link to={`/productcategory/${cate.id}`}>{cate.name}</Link></span>
                       </a>
                     </li>
                   ))}

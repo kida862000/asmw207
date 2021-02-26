@@ -3,34 +3,34 @@ import { Link, useParams } from "react-router-dom";
 import Axios from "axios";
 const ProductCategory = () => {
   const { id } = useParams();
-  const [categor, setCategor] = useState([]);
+  const [Category, setCategory] = useState([]);
   useEffect(() => {
     Axios.get(` https://5f276252f5d27e001612dfc4.mockapi.io/API/category`).then(
       (res) => {
-        setCategor(res.data);
+        setCategory(res.data);
       }
     );
   }, []);
-  const [pagep, setPagep] = useState(1);
-  const [produc, setProduc] = useState([]);
+  const [page, setPage] = useState(1);
+  const [product, setProduct] = useState([]);
   useEffect(() => {
     Axios.get(
       `https://5f276252f5d27e001612dfc4.mockapi.io/API/products` +
         "?page=" +
-        pagep +
+        page +
         "&limit=12"
     ).then((res) => {
-      setProduc(res.data);
+      setProduct(res.data);
     });
-  }, [pagep]);
-  const trangTruocp = function () {
-    if (pagep == 1) {
+  }, [page]);
+  const trangTruoc = function () {
+    if (page == 1) {
       return;
     }
-    setPagep(pagep - 1);
+    setPage(page - 1);
   };
-  const trangSaup = function () {
-    setPagep(pagep + 1);
+  const trangSau = function () {
+    setPage(page + 1);
   };
   return (
     <div>
@@ -53,76 +53,39 @@ const ProductCategory = () => {
                   <div className="float-md-left mb-4">
                     <h2 className="text-black h5">Shop All1</h2>
                   </div>
-                  <div className="d-flex">
-                    <div className="dropdown mr-1 ml-md-auto">
-                      <button
-                        type="button"
-                        className="btn btn-secondary btn-sm dropdown-toggle"
-                        id="dropdownMenuOffset"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        Latest
-                      </button>
-                      <div
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuOffset"
-                      >
-                        <a className="dropdown-item" href="#">
-                          Men
-                        </a>
-                        <a className="dropdown-item" href="#">
-                          Women
-                        </a>
-                        <a className="dropdown-item" href="#">
-                          Children
-                        </a>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className="row mb-5">
-                {produc.map((pro, index) => (
-                  <div
-                    className="col-sm-6 col-lg-4 mb-4"
-                    data-aos="fade-up"
-                    key={index}
-                  >
-                    <div className="block-4 text-center border">
-                      <figure className="block-4-image">
-                        <Link to={`/products/details/${pro.id}`}>
-                          {" "}
-                          <img src={pro.images} width="200" height="250"></img>
-                        </Link>
-                      </figure>
-                      <div className="block-4-text p-4">
-                        <h3>
-                          <Link to={`/product/details/${pro.id}`}>
-                            {pro.name}
-                          </Link>
-                        </h3>
-                        <p className="text-primary font-weight-bold">
-                          New Price: ${pro.price}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                {/* {product.map((pro, index) => (
+                 
+                    {id === pro.cateId ? pro.name : "không tồn tại"}
+
+                ))} */}
+                {product.map((pro, index) => (
+                  
+                (() => {                                                       
+                    if (id == pro.cateId) {
+                       return  <td>{pro.name}</td>&<td>{pro.name}</td>
+                   }
+                   else 
+                    return  null
+               })()
+               
+
                 ))}
               </div>
               <div class="container" style={{ marginLeft: "86%" }}>
                 <ul class="pagination">
-                  <li class="page-item" onClick={trangTruocp}>
+                  <li class="page-item" onClick={trangTruoc}>
                     <a class="page-link" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Trang trước</span>
                     </a>
                   </li>
                   <li>
-                    <a className="page-link">{pagep}</a>
+                    <a className="page-link">{page}</a>
                   </li>
-                  <li class="page-item" onClick={trangSaup}>
+                  <li class="page-item" onClick={trangSau}>
                     <a class="page-link" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Trang sau</span>
@@ -137,10 +100,10 @@ const ProductCategory = () => {
                   Categories
                 </h3>
                 <ul className="list-unstyled mb-0">
-                  {categor.map((cate, index) => (
+                {Category.map((cate, index) => (
                     <li className="mb-1">
                       <a href="#" className="d-flex">
-                        <span>{cate.name}</span>
+                        <span> <Link to={`/productcategory/${cate.id}`}>{cate.name}</Link></span>
                       </a>
                     </li>
                   ))}

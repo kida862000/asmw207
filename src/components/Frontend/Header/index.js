@@ -68,21 +68,6 @@ const Header = (props) => {
               <li>
                 <Link to={`/product`}>Shop</Link>
               </li>
-              <li className="has-children">
-                <a href="">About</a>
-                <ul className="dropdown">
-                  <li>
-                    {" "}
-                    <Link to={'/productcategory/'}>Menu One</Link>
-                  </li>
-                  <li>
-                    <a href="#">Menu Two</a>
-                  </li>
-                  <li>
-                    <a href="#">Menu Three</a>
-                  </li>
-                </ul>
-              </li>
               <li>
                 <Link to={`/`}>Contact</Link>
               </li>
