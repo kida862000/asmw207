@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Axios from "axios";
-const Product = () => {
+const ProductCategory = () => {
   const { id } = useParams();
-  const [category, setCategory] = useState([]);
+  const [categor, setCategor] = useState([]);
   useEffect(() => {
     Axios.get(` https://5f276252f5d27e001612dfc4.mockapi.io/API/category`).then(
       (res) => {
-        setCategory(res.data);
+        setCategor(res.data);
       }
     );
   }, []);
   const [pagep, setPagep] = useState(1);
-  const [products, setProducts] = useState([]);
+  const [produc, setProduc] = useState([]);
   useEffect(() => {
     Axios.get(
       `https://5f276252f5d27e001612dfc4.mockapi.io/API/products` +
@@ -20,7 +20,7 @@ const Product = () => {
         pagep +
         "&limit=12"
     ).then((res) => {
-      setProducts(res.data);
+      setProduc(res.data);
     });
   }, [pagep]);
   const trangTruocp = function () {
@@ -51,7 +51,7 @@ const Product = () => {
               <div className="row">
                 <div className="col-md-12 mb-5">
                   <div className="float-md-left mb-4">
-                    <h2 className="text-black h5">Shop All</h2>
+                    <h2 className="text-black h5">Shop All1</h2>
                   </div>
                   <div className="d-flex">
                     <div className="dropdown mr-1 ml-md-auto">
@@ -84,7 +84,7 @@ const Product = () => {
                 </div>
               </div>
               <div className="row mb-5">
-                {products.map((pro, index) => (
+                {produc.map((pro, index) => (
                   <div
                     className="col-sm-6 col-lg-4 mb-4"
                     data-aos="fade-up"
@@ -137,7 +137,7 @@ const Product = () => {
                   Categories
                 </h3>
                 <ul className="list-unstyled mb-0">
-                  {category.map((cate, index) => (
+                  {categor.map((cate, index) => (
                     <li className="mb-1">
                       <a href="#" className="d-flex">
                         <span>{cate.name}</span>
@@ -154,4 +154,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductCategory;

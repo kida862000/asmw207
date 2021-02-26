@@ -9,9 +9,6 @@ import {
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Dashboard from "./pages/views/Backend/Dashboard";
-import User from "./pages/views/Backend/User";
-import AddUser from "./pages/views/Backend/User/add";
-import EditUser from "./pages/views/Backend/User/edit";
 import Category from "./pages/views/Backend/Category";
 import AddCategory from "./pages/views/Backend/Category/add";
 import EditCategory from "./pages/views/Backend/Category/edit";
@@ -22,35 +19,41 @@ import EditProduct from "./pages/views/Backend/Product/edit";
 import Home from "./pages/views/Frontend/Home";
 import Products from "./pages/views/Frontend/Product";
 import ProductDetails from "./pages/views/Frontend/ProductDetails";
+import ProductCategory from "./pages/views/Frontend/ProductCategory";
 function App() {
+  const [pagec, setPagec] = useState(1);
   const [category, setCategory] = useState([]);
   useEffect(() => {
-    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category`).then(
-      (res) => {
-        setCategory(res.data);
-      }
-    );
-  }, []);
+    Axios.get(
+      ` https://5f276252f5d27e001612dfc4.mockapi.io/API/category` +
+        "?page=" +
+        pagec +
+        "&limit=10"
+    ).then((res) => {
+      setCategory(res.data);
+    });
+  }, [pagec]);
   const [page, setPage] = useState(1);
-  const limit = 10;
   const [product, setProduct] = useState([]);
   useEffect(() => {
     Axios.get(
       `https://5f276252f5d27e001612dfc4.mockapi.io/API/products` +
-        "?limit=" +
-        limit +
-        "&page=" +
-        page
+        "?page=" +
+        page +
+        "&limit=10"
     ).then((res) => {
       setProduct(res.data);
     });
   }, [page]);
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/user`).then((res) => {
-      setUser(res.data);
-    });
-  }, []);
+  const trangTruocc = function () {
+    if (pagec == 1) {
+      return;
+    }
+    setPagec(pagec - 1);
+  };
+  const trangSauc = function () {
+    setPagec(pagec + 1);
+  };
   const trangTruoc = function () {
     if (page == 1) {
       return;
@@ -68,26 +71,22 @@ function App() {
             <LayoutAdmin>
               <Switch>
                 <Route exact path="/admin">
-                  <Dashboard
-                    user={user}
-                    category={category}
-                    product={product}
-                   
-                  />
-                </Route>
-                {/* User*/}
-                <Route exact path="/admin/user">
-                  <User user={user} />
-                </Route>
-                <Route exact path="/admin/user/add">
-                  <AddUser />
-                </Route>
-                <Route exact path="/admin/user/edit/:id">
-                  <EditUser user={user} />
+                  <Dashboard category={category} product={product} />
                 </Route>
                 {/* Category*/}
                 <Route exact path="/admin/category">
                   <Category category={category} />
+                  <ul className="pagination">
+                    <li className="page-item" onClick={trangTruocc}>
+                      <a className="page-link">Trang trước</a>
+                    </li>
+                    <li className="page-item">
+                      <a className="page-link">{pagec}</a>
+                    </li>
+                    <li className="page-item" onClick={trangSauc}>
+                      <a className="page-link">Trang sau</a>
+                    </li>
+                  </ul>
                 </Route>
                 <Route exact path="/admin/category/add">
                   <AddCategory />
@@ -123,10 +122,13 @@ function App() {
           <Route path="/:path?/:path?/:path?" exact>
             <LayoutMain>
               <Route exact path="/">
-                <Home category={category} product={product} />
+                <Home category={category}/>
               </Route>
               <Route exact path="/product">
-                <Products product={product} category={category} />
+                <Products category={category} />
+              </Route>
+              <Route exact path="/productcategry">
+                <ProductCategory/>
               </Route>
               <Route exact path="/product/details/:id">
                 <ProductDetails category={category} product={product} />{" "}

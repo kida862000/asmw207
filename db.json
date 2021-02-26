@@ -33,14 +33,6 @@
       "noidung": "Quần Jean nam luôn là mẫu quần được các lứa tuổi rất ưa chuộng và lựa chọn. Với phong cách trẻ trung, nam tính, vừa lịch lãm vừa bụi bặm,",
       "cateId": "2",
       "id": 3
-    },
-    {
-      "name": "a",
-      "images": "a",
-      "price": "2",
-      "noidung": "a",
-      "cateId": "2",
-      "id": 4
     }
   ],
   "user": [
@@ -67,6 +59,28 @@
       "email": "1@gmail.com",
       "power": "0",
       "id": 3
+    },
+    {
+      "username": "11",
+      "password": "1",
+      "phone": "1",
+      "email": "1@gmail.com",
+      "power": "Admin",
+      "id": 4
+    },
+    {
+      "username": "a1",
+      "password": "a",
+      "phone": "22",
+      "email": "2@gmail.com",
+      "id": 5
+    },
+    {
+      "username": "32234dsfsfsd",
+      "password": "23423423",
+      "phone": "23423423",
+      "email": "a@gmail.com",
+      "id": 6
     }
   ],
   "order": [

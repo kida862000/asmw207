@@ -3,6 +3,27 @@ import { Link, useParams } from "react-router-dom";
 import Axios from "axios";
 const Home = (props) => {
   const { id } = useParams();
+  const [page, setPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    Axios.get(
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/products` +
+        "?page=" +
+        page +
+        "&limit=12"
+    ).then((res) => {
+      setProducts(res.data);
+    });
+  }, [page]);
+  const trangTruoc = function () {
+    if (page == 1) {
+      return;
+    }
+    setPage(page - 1);
+  };
+  const trangSau = function () {
+    setPage(page + 1);
+  };
   return (
     <div>
       <div
@@ -38,46 +59,55 @@ const Home = (props) => {
         <div className="container">
           <div className="row justify-content-center mb-3 pb-3">
             <div className="col-md-12 heading-section text-center ftco-animate">
-              <h2 className="mb-4">New Shoes Arrival</h2>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia
-              </p>
+              <h2 className="mb-4">Danh sách sản phẩm</h2>
             </div>
           </div>
         </div>
-        <div className="container">
-          <div className="row">
-            {props.product.map((pro) => (
-              <div className="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex" style={{marginTop: '25px'}}>
-                <div className="product d-flex flex-column">
-                  <a href="#" className="img-prod">
-                    <img src={pro.images} width="200" height="300"></img>
-                    <div className="overlay" />
-                  </a>
+        <div class="container" style={{marginLeft:'86%'}}>
+          <ul class="pagination">
+            <li class="page-item" onClick={trangTruoc}>
+              <a class="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Trang trước</span>
+              </a>
+            </li>
+            <li>
+              <a className="page-link">{page}</a>
+            </li>
+            <li class="page-item" onClick={trangSau}>
+              <a class="page-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Trang sau</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="row mb-5">
+          {products.map((pro, index) => (
+            <div
+              className="col-sm-6 col-lg-3 mb-4"
+              data-aos="fade-up"
+              key={index}
+            >
+              <div className="block-4 text-center border">
+                <figure className="block-4-image">
+                  <Link to={`/products/details/${pro.id}`}>
+                    <img src={pro.images} width="250" height="300"></img>
+                  </Link>
+                </figure>
+                <div className="block-4-text p-4">
                   <h3>
                     <Link to={`/product/details/${pro.id}`}>{pro.name}</Link>
                   </h3>
-                  <div class="pricing">
-                    <p class="price">
-                      <span>${pro.price}</span>
-                    </p>
-                  </div>
-                  <Link
-                    to={`/product/details/${pro.id}`}
-                    className="btn btn-primary btn-sm"
-                  >
-                    Chi Tiết
-                  </Link>
-                  <a href="#" className="btn btn-danger btn-sm">
-                    Add to cart
-                  </a>
+                  <p className="text-primary font-weight-bold">
+                    New Price: ${pro.price}
+                  </p>
                 </div>
               </div>
-              
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+       
       </section>
     </div>
   );
