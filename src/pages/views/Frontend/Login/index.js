@@ -6,7 +6,7 @@ const uiConfig = {
   // Popup signin flow rather than redirect flow.
   signInFlow: "redirect",
 
-  signInSuccessUrl: "/admin/dashboard",
+  signInSuccessUrl: "/",
   // We will display Google and Facebook as auth providers.
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 };

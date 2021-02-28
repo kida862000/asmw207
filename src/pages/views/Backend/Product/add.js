@@ -37,7 +37,7 @@ const AddProduct = (props) => {
                 ref={register({ required: true })}
               />
               {errors.name && errors.name.type === "required" && (
-                <span className="alert-danger">Nhập tên danh mục</span>
+                <span className="alert-danger">Mời bạn nhập tên sản phẩm</span>
               )}
             </div>
             <div className="form-group">
@@ -62,7 +62,7 @@ const AddProduct = (props) => {
                 ref={register({ required: true })}
               />
               {errors.price && errors.price.type === "required" && (
-                <span className="alert-danger">Nhập giá thường</span>
+                <span className="alert-danger">Mời bạn nhập Giá</span>
               )}
             </div>
             <div className="form-group">
@@ -74,7 +74,7 @@ const AddProduct = (props) => {
                 ref={register({ required: true })}
               ></textarea>
               {errors.noidung && errors.noidung.type === "required" && (
-                <span className="alert-danger">Nhập nội dung ngắn</span>
+                <span className="alert-danger">Mời bạn nhập nội dung ngắn</span>
               )}
             </div>
             <div className="form-group">
@@ -82,7 +82,7 @@ const AddProduct = (props) => {
               <select
                 name="cateId"
                 id="cateId"
-                ref={register({ required: true, maxLength: 15 })}
+                ref={register({ required: true })}
               >
                 <option value="">--Mời bạn chọn danh mục--</option>
                 {props.category.map((cate, index) => (
@@ -90,10 +90,7 @@ const AddProduct = (props) => {
                 ))}
               </select>
               {errors.cateId && errors.cateId.type === "required" && (
-                <span className="alert-danger">Nhập tên danh mục</span>
-              )}
-              {errors.cateId && errors.cateId.type === "maxLength" && (
-                <span className="alert-danger">Tối đa 15 ký tự</span>
+                <span className="alert-danger">Mời bạn chọn danh mục</span>
               )}
             </div>
 

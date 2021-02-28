@@ -68,7 +68,7 @@ const EditProduct = (props) => {
               />
 
               {errors.username && errors.username.type === "required" && (
-                <span className="alert-danger">Nhập tên danh mục</span>
+                <span className="alert-danger">Mời bạn nhập tên sản phẩm</span>
               )}
             </div>
             <div className="form-group">
@@ -96,7 +96,7 @@ const EditProduct = (props) => {
                 ref={register({ required: true })}
               />
               {errors.price && errors.price.type === "required" && (
-                <span className="alert-danger">Nhập giá thường</span>
+                <span className="alert-danger">Mời bạn nhập  giá </span>
               )}
             </div>
             <div className="form-group">
@@ -109,7 +109,7 @@ const EditProduct = (props) => {
                 ref={register({ required: true })}
               ></textarea>
               {errors.noidung && errors.noidung.type === "required" && (
-                <span className="alert-danger">Nhập nội dung ngắn</span>
+                <span className="alert-danger">Mời bạn nhập  nội dung ngắn</span>
               )}
             </div>
             <div className="form-group">

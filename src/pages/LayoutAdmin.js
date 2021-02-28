@@ -3,25 +3,9 @@ import PropTypes from "prop-types";
 import Sidebar from "../components/Backend/Sidebar";
 import Navbar from "../components/Backend/Navbar";
 import Footer from "../components/Backend/Footer";
-import firebase from "firebase";
-const config = {
-  apiKey: "AIzaSyBX9b2G_VuFwEDZCIM1YSXYQAbU_6nbhLA",
-  authDomain: "reactjs-aa820.firebaseapp.com",
-  // ...
-};
-firebase.initializeApp(config);
+
 const LayoutAdmin = ({ children }) => {
-  useEffect(() => {
-    const unregisterAuthObserver = firebase
-      .auth()
-      .onAuthStateChanged((user) => {
-        if (!user) {
-          console.log("User is not Login");
-          return;
-        }
-      });
-    return () => unregisterAuthObserver();
-  }, []);
+  
   return (
     <div>
       <div id="wrapper">

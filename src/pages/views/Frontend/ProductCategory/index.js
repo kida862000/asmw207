@@ -51,7 +51,10 @@ const ProductCategory = () => {
               <div className="row">
                 <div className="col-md-12 mb-5">
                   <div className="float-md-left mb-4">
-                    <h2 className="text-black h5">Shop All1</h2>
+                    <h2 className="text-black h5"> Sản Phẩm Của  {Category.map((cate, index) => (
+                      <span>  {id == cate.id? cate.name:null}</span>
+                    
+                    ))}</h2>
                   </div>
                 </div>
               </div>

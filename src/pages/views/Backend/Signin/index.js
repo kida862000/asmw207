@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase";
-// Configure FirebaseUI.
-const uiConfig = {
-  // Popup signin flow rather than redirect flow.
-  signInFlow: "redirect",
 
-  signInSuccessUrl: "/admin/dashboard",
-  // We will display Google and Facebook as auth providers.
-  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-};
-function Signin() {
+function Signin(props) {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    handleLogin,
+    handleSignup,
+    hasAccount,
+    setHasAccount,
+    emailError,
+    passwordError,
+  } = props;
   return (
     <div>
       <div class="container">
@@ -21,7 +25,6 @@ function Signin() {
               <div className="card-body p-0">
                 {/* Nested Row within Card Body */}
                 <div className="row">
-                  <div className="col-lg-6 d-none d-lg-block bg-login-image" />
                   <div className="col-lg-6">
                     <div className="p-5">
                       <div className="text-center">
@@ -35,7 +38,10 @@ function Signin() {
                             id="exampleInputEmail"
                             aria-describedby="emailHelp"
                             placeholder="Enter Email Address..."
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
+                          <p className="errorMsg">{emailError}</p>
                         </div>
                         <div className="form-group">
                           <input
@@ -43,46 +49,40 @@ function Signin() {
                             className="form-control form-control-user"
                             id="exampleInputPassword"
                             placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
+                          <p className="errorMsg">{passwordError}</p>
                         </div>
-                        <div className="form-group">
-                          <div className="custom-control custom-checkbox small">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input"
-                              id="customCheck"
-                            />
-                            <label
-                              className="custom-control-label"
-                              htmlFor="customCheck"
-                            >
-                              Remember Me
-                            </label>
-                          </div>
-                        </div>
-                        <a
-                          href="index.html"
-                          className="btn btn-primary btn-user btn-block"
-                        >
-                          Login
-                        </a>
                         <hr />
-                        <StyledFirebaseAuth
-                          uiConfig={uiConfig}
-                          firebaseAuth={firebase.auth()}
-                        />
+                        <div className="form-group">
+                          {hasAccount ? (
+                            <>
+                              <button onClick={handleLogin}>Sig in</button>
+                              <p>
+                                Don't have an account?{" "}
+                                <button
+                                  onClick={() => setHasAccount(!hasAccount)}
+                                >
+                                  Sign up
+                                </button>
+                              </p>
+                            </>
+                          ) : (
+                            <>
+                              <button onClick={handleSignup}>Sign uP</button>
+                              <p>
+                                Don't an account?{" "}
+                                <button
+                                  onClick={() => setHasAccount(!hasAccount)}
+                                >
+                                  Sign in
+                                </button>
+                              </p>
+                            </>
+                          )}
+                        </div>
                       </form>
-                      <hr />
-                      <div className="text-center">
-                        <a className="small" href="forgot-password.html">
-                          Forgot Password?
-                        </a>
-                      </div>
-                      <div className="text-center">
-                        <a className="small" href="register.html">
-                          Create an Account!
-                        </a>
-                      </div>
                     </div>
                   </div>
                 </div>

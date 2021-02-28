@@ -17,7 +17,10 @@ const ProductCate = (props) => {
     <div>
       <div id="page-wrapper">
         <div className="header">
-          <h1 className="page-header">Danh Sách Sản Phẩm</h1>
+          <h1 className="page-header">Danh Sách Sản Phẩm Của {props.category.map((cate, index) => (
+                      <span>  {id == cate.id? cate.name:null}</span>
+                    
+                    ))}</h1>
           <ol className="breadcrumb">
             <li>
               <Link to="/admin/product/add">Thêm Mới</Link>

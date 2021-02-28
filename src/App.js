@@ -16,7 +16,7 @@ import Product from "./pages/views/Backend/Product";
 import AddProduct from "./pages/views/Backend/Product/add";
 import EditProduct from "./pages/views/Backend/Product/edit";
 import ProductCate from "./pages/views/Backend/Product/ProductCate";
-import Signin from "./pages/views/Backend/Signin";
+// import Signin from "./pages/views/Backend/Signin";
 import ContactA from "./pages/views/Backend/Contact";
 // frontend
 import Home from "./pages/views/Frontend/Home";
@@ -25,6 +25,19 @@ import ProductDetails from "./pages/views/Frontend/ProductDetails";
 import ProductCategory from "./pages/views/Frontend/ProductCategory";
 import Contact from "./pages/views/Frontend/Contact";
 import Login from "./pages/views/Frontend/Login";
+//firebase
+import firebase from "firebase";
+const config = {
+  apiKey: "AIzaSyBX9b2G_VuFwEDZCIM1YSXYQAbU_6nbhLA",
+  authDomain: "reactjs-aa820.firebaseapp.com",
+  databaseURL: "https://reactjs-aa820.firebaseio.com",
+  projectId: "reactjs-aa820",
+  storageBucket: "reactjs-aa820.appspot.com",
+  messagingSenderId: "421834289164",
+  appId: "1:421834289164:web:94af1f6f26859bc3aefe29",
+  // ...
+};
+firebase.initializeApp(config);
 function App() {
   const [pagec, setPagec] = useState(1);
   const [category, setCategory] = useState([]);
@@ -68,6 +81,72 @@ function App() {
   const trangSau = function () {
     setPage(page + 1);
   };
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [hasAccount, setHasAccount] = useState(false);
+
+  const clearInputs = () => {
+    setEmail("");
+    setPassword("");
+  };
+  const clearError = () => {
+    setEmailError("");
+    setPasswordError("");
+  };
+  const handleLogin = () => {
+    clearError();
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/invalid-email":
+          case "auth/user-disabled":
+          case "auth/user-not-found":
+            setEmailError(err.message);
+            break;
+          case "auth/wrong-password":
+            setPasswordError(err.message);
+            break;
+        }
+      });
+  };
+  const handleSignup = () => {
+    clearError();
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/email-already-in-use":
+          case "auth/invalid-email":
+            setEmailError(err.message);
+            break;
+          case "auth/weak-password":
+            setPasswordError(err.message);
+            break;
+        }
+      });
+  };
+  const handleLogout = () => {
+    firebase.auth().signOut();
+  };
+  const authListener = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        clearInputs();
+        setUser(user);
+      } else {
+        setUser("");
+      }
+    });
+  };
+  useEffect(() => {
+    authListener();
+  }, []);
   return (
     <div>
       <Router>
@@ -75,10 +154,21 @@ function App() {
           <Route path="/admin/:path?/:path?/:path?" exact>
             <LayoutAdmin>
               <Switch>
+                {/* <Route exact path="/admin/">
+                  <Signin
+                    email={email}
+                    setEmail={setEmail}
+                    password={password}
+                    setPassword={setPassword}
+                    handleLogin={handleLogin}
+                    handleSignup={handleSignup}
+                    hasAccount={hasAccount}
+                    setHasAccount={setHasAccount}
+                    emailError={emailError}
+                    passwordError={passwordError}
+                  />
+                </Route> */}
                 <Route exact path="/admin/">
-                  <Signin />
-                </Route>
-                <Route exact path="/admin/dashboard">
                   <Dashboard category={category} product={product} />
                 </Route>
                 {/* Category*/}
