@@ -13,42 +13,46 @@ const EditProduct = (props) => {
   let history = useHistory();
   // hiển thị dữ liệu có id thông qua useEffect
   useEffect(() => {
-    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/products/${id}`).then((res) => {
-      console.log(res);
+    Axios.get(
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/products/${id}`
+    ).then((res) => {
       setProduct(res.data);
     });
   }, []);
   useEffect(() => {
-    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category`).then((res) => {
-      console.log(res);
-      setCategory(res.data);
-    });
+    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category`).then(
+      (res) => {
+        setCategory(res.data);
+      }
+    );
   }, []);
   const onSubmit = (data) => {
     const newObj = {
       ...data,
     };
-    Axios.put(`https://5f276252f5d27e001612dfc4.mockapi.io/API/products/${id}`, newObj).then((res) => {
-      console.log(res.data);
+    Axios.put(
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/products/${id}`,
+      newObj
+    ).then((res) => {
       history.push("/admin/product");
       alert("Đã sửa thành công");
       window.location.reload();
     });
   };
-  
+  const [categories, setCategories] = useState([]);
+  // hiển thị dữ liệu có id thông qua useEffect
+  useEffect(() => {
+    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category`).then(
+      (res) => {
+        setCategories(res.data);
+      }
+    );
+  }, []);
   return (
     <div>
       <div id="page-wrapper">
         <div className="header">
-          <ol className="breadcrumb">
-            <li>
-              <Link to="/admin">Dashboard</Link>
-            </li>
-            <li className="active">
-              <Link to="/admin/product">Sản phẩm</Link>
-            </li>
-            <li className="active">Sửa Sản phẩm</li>
-          </ol>
+          <h1 className="page-header">Thêm Sản Phẩm</h1>
         </div>
         <div id="page-inner">
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -60,14 +64,12 @@ const EditProduct = (props) => {
                 id="name"
                 name="name"
                 defaultValue={product.name}
-               
                 ref={register({ required: true })}
               />
-              
+
               {errors.username && errors.username.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>
               )}
-             
             </div>
             <div className="form-group">
               <label>Ảnh</label>
@@ -115,19 +117,15 @@ const EditProduct = (props) => {
               <select
                 name="cateId"
                 id="cateId"
-              
-                ref={register({ required: true, maxLength: 15 })}
+                ref={register({ required: true })}
               >
                 <option value={product.cateId}>{product.cateId}</option>
-                {props.category.map((cate, index) => (
+                {category.map((cate, index) => (
                   <option value={cate.id}>{cate.name}</option>
                 ))}
               </select>
               {errors.cateId && errors.cateId.type === "required" && (
-                <span className="alert-danger">Nhập tên danh mục</span>
-              )}
-              {errors.cateId && errors.cateId.type === "maxLength" && (
-                <span className="alert-danger">Tối đa 15 ký tự</span>
+                <span className="alert-danger">Mời Bạn chọn Danh Mục</span>
               )}
             </div>
             <button type="submit" className="btn btn-primary">
@@ -140,11 +138,13 @@ const EditProduct = (props) => {
   );
 };
 
-EditProduct.propTypes = { id : PropTypes.number.isRequired,
-  name : PropTypes.string.isRequired,
-  images : PropTypes.string.isRequired,
-  price : PropTypes.number.isRequired,
-  noidung : PropTypes.string.isRequired,
-  cateId: PropTypes.string.isRequired,};
+EditProduct.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  images: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  noidung: PropTypes.string.isRequired,
+  cateId: PropTypes.string.isRequired,
+};
 
 export default EditProduct;

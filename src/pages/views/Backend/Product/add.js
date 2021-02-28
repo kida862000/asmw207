@@ -8,7 +8,10 @@ const AddProduct = (props) => {
   const { register, handleSubmit, errors } = useForm();
   let history = useHistory();
   const onSubmit = (data) => {
-    Axios.post("https://5f276252f5d27e001612dfc4.mockapi.io/API/products", data).then((res) => {
+    Axios.post(
+      "https://5f276252f5d27e001612dfc4.mockapi.io/API/products",
+      data
+    ).then((res) => {
       console.log(res.data);
       history.push("/admin/product");
       alert("Đã thêm danh mục thành công");
@@ -20,15 +23,7 @@ const AddProduct = (props) => {
     <div>
       <div id="page-wrapper">
         <div className="header">
-          <ol className="breadcrumb">
-            <li>
-              <Link to="/admin">Dashboard</Link>
-            </li>
-            <li className="active">
-              <Link to="/admin/user">Sản Phẩm</Link>
-            </li>
-            <li className="active">Thêm Mới Sản Phẩm</li>
-          </ol>
+          <h1 className="page-header">Sửa Sản Phẩm</h1>
         </div>
         <div id="page-inner">
           <form onSubmit={handleSubmit(onSubmit)}>

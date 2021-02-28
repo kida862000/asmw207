@@ -17,17 +17,8 @@ const AddCate = () => {
   return (
     <div>
       <div id="page-wrapper">
-        <div className="header">
-          <h1 className="page-header">Danh sách danh mục</h1>
-          <ol className="breadcrumb">
-            <li>
-              <Link to="/admin">Dashboard</Link>
-            </li>
-            <li className="active">
-              <Link to="/admin/category">Danh Mục</Link>
-            </li>
-            <li className="active">Thêm Mới Danh Mục</li>
-          </ol>
+      <div className="header">
+          <h1 className="page-header">Thêm Danh Mục</h1>
         </div>
         <div id="page-inner">
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -38,13 +29,10 @@ const AddCate = () => {
                 className="form-control"
                 id="name"
                 name="name"
-                ref={register({ required: true, maxLength: 15 })}
+                ref={register({ required: true })}
               />
               {errors.name && errors.name.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>
-              )}
-              {errors.name && errors.name.type === "maxLength" && (
-                <span className="alert-danger">Tối đa 15 ký tự</span>
               )}
             </div>
             <button type="submit" className="btn btn-primary">

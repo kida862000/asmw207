@@ -15,11 +15,16 @@ import EditCategory from "./pages/views/Backend/Category/edit";
 import Product from "./pages/views/Backend/Product";
 import AddProduct from "./pages/views/Backend/Product/add";
 import EditProduct from "./pages/views/Backend/Product/edit";
+import ProductCate from "./pages/views/Backend/Product/ProductCate";
+import Signin from "./pages/views/Backend/Signin";
+import ContactA from "./pages/views/Backend/Contact";
 // frontend
 import Home from "./pages/views/Frontend/Home";
 import Products from "./pages/views/Frontend/Product";
 import ProductDetails from "./pages/views/Frontend/ProductDetails";
 import ProductCategory from "./pages/views/Frontend/ProductCategory";
+import Contact from "./pages/views/Frontend/Contact";
+import Login from "./pages/views/Frontend/Login";
 function App() {
   const [pagec, setPagec] = useState(1);
   const [category, setCategory] = useState([]);
@@ -70,7 +75,10 @@ function App() {
           <Route path="/admin/:path?/:path?/:path?" exact>
             <LayoutAdmin>
               <Switch>
-                <Route exact path="/admin">
+                <Route exact path="/admin/">
+                  <Signin />
+                </Route>
+                <Route exact path="/admin/dashboard">
                   <Dashboard category={category} product={product} />
                 </Route>
                 {/* Category*/}
@@ -115,6 +123,23 @@ function App() {
                 <Route exact path="/admin/product/edit/:id">
                   <EditProduct category={category} product={product} />
                 </Route>
+                <Route exact path="/admin/product/productcate/:id">
+                  <ProductCate category={category} product={product} />
+                  <ul className="pagination">
+                    <li className="page-item" onClick={trangTruoc}>
+                      <a className="page-link">Trang trước</a>
+                    </li>
+                    <li className="page-item">
+                      <a className="page-link">{page}</a>
+                    </li>
+                    <li className="page-item" onClick={trangSau}>
+                      <a className="page-link">Trang sau</a>
+                    </li>
+                  </ul>
+                </Route>
+                <Route exact path="/admin/contact">
+                  <ContactA />
+                </Route>
               </Switch>
             </LayoutAdmin>
           </Route>
@@ -122,16 +147,22 @@ function App() {
           <Route path="/:path?/:path?/:path?" exact>
             <LayoutMain>
               <Route exact path="/">
-                <Home category={category}/>
+                <Home category={category} />
               </Route>
               <Route exact path="/product">
                 <Products category={category} />
               </Route>
               <Route exact path="/productcategory/:id">
-                <ProductCategory/>
+                <ProductCategory />
               </Route>
               <Route exact path="/product/details/:id">
                 <ProductDetails category={category} product={product} />{" "}
+              </Route>
+              <Route exact path="/contact">
+                <Contact />
+              </Route>
+              <Route exact path="/login">
+                <Login />
               </Route>
             </LayoutMain>
           </Route>

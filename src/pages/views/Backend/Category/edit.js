@@ -12,7 +12,9 @@ const EditCate = (props) => {
   let history = useHistory();
   // hiển thị dữ liệu có id thông qua useEffect
   useEffect(() => {
-    Axios.get(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`).then((res) => {
+    Axios.get(
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`
+    ).then((res) => {
       console.log(res);
       setCategory(res.data);
     });
@@ -21,7 +23,10 @@ const EditCate = (props) => {
     const newObj = {
       ...data,
     };
-    Axios.put(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`, newObj).then((res) => {
+    Axios.put(
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`,
+      newObj
+    ).then((res) => {
       console.log(res.data);
       history.push("/admin/category");
       alert("Đã sửa thành công");
@@ -32,34 +37,22 @@ const EditCate = (props) => {
     <div>
       <div id="page-wrapper">
         <div className="header">
-          <h1 className="page-header">Danh sách Danh Mục</h1>
-          <ol className="breadcrumb">
-            <li>
-              <Link to="/admin">Dashboard</Link>
-            </li>
-            <li className="active">
-              <Link to="/admin/category">Danh Mục</Link>
-            </li>
-            <li className="active">Sửa Danh MỤc</li>
-          </ol>
+          <h1 className="page-header">Sửa Danh Mục</h1>
         </div>
         <div id="page-inner">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
-              <label>UserName</label>
+              <label>Danh Mục</label>
               <input
                 type="Text"
                 className="form-control"
                 id="name"
                 name="name"
                 defaultValue={category.name}
-                ref={register({ required: true, maxLength: 15 })}
+                ref={register({ required: true})}
               />
               {errors.name && errors.name.type === "required" && (
                 <span className="alert-danger">Nhập tên danh mục</span>
-              )}
-              {errors.name && errors.name.type === "maxLength" && (
-                <span className="alert-danger">Tối đa 15 ký tự</span>
               )}
             </div>
             <button type="submit" className="btn btn-primary">

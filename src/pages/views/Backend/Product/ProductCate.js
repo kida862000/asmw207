@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import Axios from "axios";
-const Product = (props) => {
+const ProductCate = (props) => {
   const { id } = useParams();
   const removeProduct = (id) => {
     Axios.delete(
@@ -45,38 +45,41 @@ const Product = (props) => {
                         <th>Xóa</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {props.product.map((pro, index) => (
-                        <tr className="odd gradeX" key={index}>
-                          <td>{index + 1}</td>
-                          <td>{pro.name}</td>
-                          <td>
-                            <img
-                              src={pro.images}
-                              width="100"
-                              height="100"
-                            ></img>
-                          </td>
-                          <td>${pro.price}</td>
-                          <td>{pro.noidung}</td>
-                          <td>
-                            <Link to={`/admin/product/edit/${pro.id}`}>
-                              <button className="btn btn-primary btn-sm">
-                                sửa
+
+                    {props.product.map((pro, index) => (
+                      <tbody>
+                        {id === pro.cateId ? (
+                          <tr className="odd gradeX" key={index}>
+                            <td>{index + 1}</td>
+                            <td>{pro.name}</td>
+                            <td>
+                              <img
+                                src={pro.images}
+                                width="100"
+                                height="100"
+                              ></img>
+                            </td>
+                            <td>${pro.price}</td>
+                            <td>{pro.noidung}</td>
+                            <td>
+                              <Link to={`/admin/product/edit/${pro.id}`}>
+                                <button className="btn btn-primary btn-sm">
+                                  sửa
+                                </button>
+                              </Link>
+                            </td>
+                            <td>
+                              <button
+                                className="btn btn-danger btn-sm"
+                                onClick={() => removeProduct(pro.id)}
+                              >
+                                Xóa
                               </button>
-                            </Link>
-                          </td>
-                          <td>
-                            <button
-                              className="btn btn-danger btn-sm"
-                              onClick={() => removeProduct(pro.id)}
-                            >
-                              Xóa
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
+                            </td>
+                          </tr>
+                        ) : null}
+                      </tbody>
+                    ))}
                   </table>
                 </div>
               </div>
@@ -90,7 +93,6 @@ const Product = (props) => {
                       <li className="mb-1">
                         <a href="#" className="d-flex">
                           <span>
-                            {" "}
                             <Link to={`/admin/product/productcate/${cate.id}`}>
                               {cate.name}
                             </Link>
@@ -98,6 +100,11 @@ const Product = (props) => {
                         </a>
                       </li>
                     ))}
+                    <li>
+                      <a>
+                        <Link to={`/admin/product`}>ALL Product</Link>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -109,7 +116,7 @@ const Product = (props) => {
     </div>
   );
 };
-Product.propTypes = {
+ProductCate.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   images: PropTypes.string.isRequired,
@@ -117,4 +124,4 @@ Product.propTypes = {
   noidung: PropTypes.string.isRequired,
   cateId: PropTypes.string.isRequired,
 };
-export default Product;
+export default ProductCate;

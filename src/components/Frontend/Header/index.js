@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Header = (props) => {
   return (
-    <div>
-      <header className="site-navbar" role="banner">
+    <div >
+      <header className="site-navbar" role="banner" >
         <div className="site-navbar-top">
           <div className="container">
             <div className="row align-items-center">
@@ -69,7 +69,7 @@ const Header = (props) => {
                 <Link to={`/product`}>Shop</Link>
               </li>
               <li>
-                <Link to={`/`}>Contact</Link>
+                <Link to={`/contact`}>Contact</Link>
               </li>
               <li>
                 <Link to={`/`}>Blog</Link>

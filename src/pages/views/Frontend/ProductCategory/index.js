@@ -56,22 +56,40 @@ const ProductCategory = () => {
                 </div>
               </div>
               <div className="row mb-5">
-                {/* {product.map((pro, index) => (
-                 
-                    {id === pro.cateId ? pro.name : "không tồn tại"}
-
-                ))} */}
                 {product.map((pro, index) => (
-                  
-                (() => {                                                       
-                    if (id == pro.cateId) {
-                       return  <td>{pro.name}</td>&<td>{pro.name}</td>
-                   }
-                   else 
-                    return  null
-               })()
-               
-
+                  <div>
+                    {id == pro.cateId ? (
+                      <Link to={`/product/details/${pro.id}`}>
+                        <div
+                          className="col-sm-6 col-lg-4 mb-3"
+                          data-aos="fade-up"
+                          key={index}
+                        >
+                          <div className="block-4 text-center border">
+                            <figure className="block-4-image">
+                              <Link to={`/products/details/${pro.id}`}>
+                                <img
+                                  src={pro.images}
+                                  width="200"
+                                  height="250"
+                                ></img>
+                              </Link>
+                            </figure>
+                            <div className="block-4-text p-6">
+                              <h3>
+                                <Link to={`/product/details/${pro.id}`}>
+                                  {pro.name}
+                                </Link>
+                              </h3>
+                              <p className="text-primary font-weight-bold">
+                                New Price: ${pro.price}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    ) : null}
+                  </div>
                 ))}
               </div>
               <div class="container" style={{ marginLeft: "86%" }}>
@@ -100,10 +118,15 @@ const ProductCategory = () => {
                   Categories
                 </h3>
                 <ul className="list-unstyled mb-0">
-                {Category.map((cate, index) => (
+                  {Category.map((cate, index) => (
                     <li className="mb-1">
                       <a href="#" className="d-flex">
-                        <span> <Link to={`/productcategory/${cate.id}`}>{cate.name}</Link></span>
+                        <span>
+                          {" "}
+                          <Link to={`/productcategory/${cate.id}`}>
+                            {cate.name}
+                          </Link>
+                        </span>
                       </a>
                     </li>
                   ))}
