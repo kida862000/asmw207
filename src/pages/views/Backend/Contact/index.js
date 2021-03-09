@@ -72,7 +72,13 @@ const Contact = (props) => {
                             <td>
                               <button
                                 className="btn btn-danger btn-sm"
-                                onClick={() => removeContact(cont.id)}
+                                onClick={() => {
+                                  if (
+                                    window.confirm("Bạn có muốn xóa không?")
+                                  ) {
+                                    removeContact(cont.id);
+                                  }
+                                }}
                               >
                                 Xóa
                               </button>

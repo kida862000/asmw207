@@ -74,7 +74,15 @@ const ProductCate = (props) => {
                             <td>
                               <button
                                 className="btn btn-danger btn-sm"
-                                onClick={() => removeProduct(pro.id)}
+                                onClick={() => {
+                                  if (
+                                    window.confirm(
+                                      "Bạn có muốn xóa không?"
+                                    )
+                                  ) {
+                                    removeProduct(pro.id);
+                                  }
+                                }}
                               >
                                 Xóa
                               </button>

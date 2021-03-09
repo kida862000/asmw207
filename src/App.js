@@ -16,7 +16,6 @@ import Product from "./pages/views/Backend/Product";
 import AddProduct from "./pages/views/Backend/Product/add";
 import EditProduct from "./pages/views/Backend/Product/edit";
 import ProductCate from "./pages/views/Backend/Product/ProductCate";
-// import Signin from "./pages/views/Backend/Signin";
 import ContactA from "./pages/views/Backend/Contact";
 // frontend
 import Home from "./pages/views/Frontend/Home";
@@ -81,72 +80,6 @@ function App() {
   const trangSau = function () {
     setPage(page + 1);
   };
-  const [user, setUser] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [hasAccount, setHasAccount] = useState(false);
-
-  const clearInputs = () => {
-    setEmail("");
-    setPassword("");
-  };
-  const clearError = () => {
-    setEmailError("");
-    setPasswordError("");
-  };
-  const handleLogin = () => {
-    clearError();
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
-            setEmailError(err.message);
-            break;
-          case "auth/wrong-password":
-            setPasswordError(err.message);
-            break;
-        }
-      });
-  };
-  const handleSignup = () => {
-    clearError();
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/email-already-in-use":
-          case "auth/invalid-email":
-            setEmailError(err.message);
-            break;
-          case "auth/weak-password":
-            setPasswordError(err.message);
-            break;
-        }
-      });
-  };
-  const handleLogout = () => {
-    firebase.auth().signOut();
-  };
-  const authListener = () => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        clearInputs();
-        setUser(user);
-      } else {
-        setUser("");
-      }
-    });
-  };
-  useEffect(() => {
-    authListener();
-  }, []);
   return (
     <div>
       <Router>
@@ -154,20 +87,6 @@ function App() {
           <Route path="/admin/:path?/:path?/:path?" exact>
             <LayoutAdmin>
               <Switch>
-                {/* <Route exact path="/admin/">
-                  <Signin
-                    email={email}
-                    setEmail={setEmail}
-                    password={password}
-                    setPassword={setPassword}
-                    handleLogin={handleLogin}
-                    handleSignup={handleSignup}
-                    hasAccount={hasAccount}
-                    setHasAccount={setHasAccount}
-                    emailError={emailError}
-                    passwordError={passwordError}
-                  />
-                </Route> */}
                 <Route exact path="/admin/">
                   <Dashboard category={category} product={product} />
                 </Route>

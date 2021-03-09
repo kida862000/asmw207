@@ -5,7 +5,9 @@ import Axios from "axios";
 const Category = (props) => {
   const { id } = useParams();
   const removeCategory = (id) => {
-    Axios.delete(`https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`).then((res) => {
+    Axios.delete(
+      `https://5f276252f5d27e001612dfc4.mockapi.io/API/category/${id}`
+    ).then((res) => {
       alert("Đã xóa thành công");
       window.location.reload();
     });
@@ -56,7 +58,13 @@ const Category = (props) => {
                             <td>
                               <button
                                 className="btn btn-danger btn-sm"
-                                onClick={() => removeCategory(cate.id)}
+                                onClick={() => {
+                                  if (
+                                    window.confirm("Bạn có muốn xóa không?")
+                                  ) {
+                                    removeCategory(cate.id);
+                                  }
+                                }}
                               >
                                 Xóa
                               </button>

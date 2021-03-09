@@ -62,7 +62,7 @@ const Header = (props) => {
         >
           <div className="container">
             <ul className="site-menu js-clone-nav d-none d-md-block">
-              <li className="has-children active">
+              <li >
                 <Link to={`/`}>Home</Link>
               </li>
               <li>
