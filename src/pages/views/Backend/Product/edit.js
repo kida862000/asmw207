@@ -27,6 +27,7 @@ const EditProduct = (props) => {
     );
   }, []);
   const onSubmit = (data) => {
+     // Tạo object mới chứa toàn bộ thông tin từ input
     const newObj = {
       ...data,
     };
@@ -119,7 +120,12 @@ const EditProduct = (props) => {
                 id="cateId"
                 ref={register({ required: true })}
               >
-                <option value={product.cateId}>{product.cateId}</option>
+                
+                {categories.map((cates, index) => (
+                  <span>{product.cateId===cates.id?(<option>{cates.name}</option>):null}</span>
+                 
+                ))}
+                {/* <option value={product.cateId}>{product.cateId}</option> */}
                 {category.map((cate, index) => (
                   <option value={cate.id}>{cate.name}</option>
                 ))}

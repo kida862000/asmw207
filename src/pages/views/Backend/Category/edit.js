@@ -20,6 +20,7 @@ const EditCate = (props) => {
     });
   }, []);
   const onSubmit = (data) => {
+     // Tạo object mới chứa toàn bộ thông tin từ input
     const newObj = {
       ...data,
     };
